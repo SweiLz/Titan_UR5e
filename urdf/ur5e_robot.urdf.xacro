@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur5e">
+
+    <!-- ur5e -->
+    <xacro:include filename="$(find titan_ur5e)/urdf/ur5e.urdf.xacro" />
+
+    <!-- arm -->
+    <xacro:arg name="kinematics_config" default="$(find titan_ur5e)/config/ur5e_kinematic_default.yaml"/>
+    <xacro:arg name="prefix" default=""/>
+    <xacro:arg name="fixed_frame" default="world"/>
+    <xacro:arg name="fixed_xyz" default="0.0 0.0 0.0"/>
+    <xacro:arg name="fixed_rpy" default="0.0 0.0 0.0"/>
+
+    <xacro:ur5e_robot prefix="$(arg prefix)" joint_limited="true" elbow_joint_lower_limit="${-pi}" elbow_joint_upper_limit="0" kinematics_file="${load_yaml('$(arg kinematics_config)')}" />
+
+    <link name="world" />
+
+    <joint name="$(arg prefix)fixed_base" type="fixed">
+        <parent link="$(arg fixed_frame)" />
+        <child link="$(arg prefix)base_link" />
+        <origin xyz="$(arg fixed_xyz)" rpy="$(arg fixed_rpy)" />
+    </joint>
+
+</robot>

@@ -1,0 +1,1 @@
+roslaunch ur_calibration calibration_correction.launch robot_ip:=127.0.0.1 target_filename:="$(rospack find titan_ur5e)/config/ur5e_kinematic_config_sim.yaml"

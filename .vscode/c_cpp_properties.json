@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/liews/titan_ws/devel/include/**",
+                "/home/liews/catkin_ws/devel/include/**",
+                "/opt/ros/melodic/include/**",
+                "/home/liews/catkin_ws/src/Universal_Robots_ROS_Driver/controller_stopper/include/**",
+                "/home/liews/catkin_ws/src/Universal_Robots_ROS_Driver/ur_calibration/include/**",
+                "/home/liews/catkin_ws/src/Universal_Robots_ROS_Driver/ur_controllers/include/**",
+                "/home/liews/catkin_ws/src/universal_robot/ur_kinematics/include/**",
+                "/home/liews/catkin_ws/src/Universal_Robots_ROS_Driver/ur_robot_driver/include/**",
+                "/usr/include/**"
+            ],
+            "name": "ROS",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14"
+        }
+    ],
+    "version": 4
+}

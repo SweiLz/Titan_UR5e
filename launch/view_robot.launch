@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="joint_gui" default="false"/>
+    <arg name="config" default="" />
+    <arg if="$(eval config=='')" name="command_args" value="-d $(find titan_ur5e)/config/view_robot.rviz" />
+    <arg unless="$(eval config=='')" name="command_args" value="-d $(find titan_ur5e)/config/view_robot_moveit.rviz" />
+    <node if="$(arg joint_gui)" name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/>
+    <!-- <node unless="$(arg joint_gui)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/> -->
+    <node name="rviz" pkg="rviz" type="rviz" respawn="false" args="$(arg command_args)" output="screen">
+        <!-- <rosparam command="load" file="$(find titan_moveit_config)/config/kinematics.yaml"/> -->
+    </node>
+
+</launch>
