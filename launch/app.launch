@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+
+    <node name="app_node" pkg="titan_ur5e" type="app_node" output="screen">
+        <param name="base_frame" value="world"/>
+    </node>
+
+</launch>
+

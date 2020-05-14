@@ -11,6 +11,11 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   ur_robot_driver
+  fake_ar_publisher
+  geometry_msgs
+  message_generation
+  tf
+  moveit_ros_planning_interface
 )
 
 ## System dependencies are found with CMake's conventions
@@ -54,11 +59,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+  FILES
+  LocalizePart.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -68,10 +72,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  geometry_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -105,7 +109,15 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES titan_ur5e
-#  CATKIN_DEPENDS roscpp rospy ur_robot_driver
+  CATKIN_DEPENDS 
+    roscpp 
+    rospy 
+    ur_robot_driver
+    fake_ar_publisher
+    geometry_msgs
+    message_runtime
+    tf
+    moveit_ros_planning_interface
 #  DEPENDS system_lib
 )
 
@@ -135,7 +147,10 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/titan_ur5e_node.cpp)
 # add_executable(example src/ur5e_example.cpp)
-# add_executable(vision_node src/vision_node.cpp)
+add_executable(vision_node src/vision_node.cpp)
+add_executable(app_node src/app_node.cpp)
+
+
 # target_link_libraries(vision_node ${catkin_LIBRARIES})
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -146,12 +161,16 @@ include_directories(
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(vision_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(app_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
 
+target_link_libraries(vision_node ${catkin_LIBRARIES})
+target_link_libraries(app_node ${catkin_LIBRARIES})
 #############
 ## Install ##
 #############

@@ -1,6 +1,6 @@
 #include <ros/ros.h>
 #include <fake_ar_publisher/ARMarker.h>
-#include <app_core/LocalizePart.h>
+#include <titan_ur5e/LocalizePart.h>
 #include <tf/transform_listener.h>
 
 class Localizer
@@ -18,7 +18,7 @@ public:
         // ROS_INFO_STREAM(_last_msg->pose.pose);
     }
 
-    bool localizePart(app_core::LocalizePart::Request &req, app_core::LocalizePart::Response &res)
+    bool localizePart(titan_ur5e::LocalizePart::Request &req, titan_ur5e::LocalizePart::Response &res)
     {
         tf::Transform cam_to_target;
         tf::poseMsgToTF(_last_msg->pose.pose, cam_to_target);
